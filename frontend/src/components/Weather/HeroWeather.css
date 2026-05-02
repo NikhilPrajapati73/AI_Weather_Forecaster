@@ -1,0 +1,98 @@
+.hero-weather {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  min-height: 380px;
+}
+
+/* Subtle glow behind the card */
+.hero-weather::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+
+.city-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.condition-badge {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+}
+
+.main-temp-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  z-index: 1;
+}
+
+.temp-display {
+  display: flex;
+  align-items: flex-start;
+}
+
+.temperature {
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.unit {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  margin-left: 0.25rem;
+}
+
+.weather-illustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 140px;
+  color: var(--color-rain);
+  filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.4));
+}
+
+.feels-like {
+  font-size: 1.1rem;
+  z-index: 1;
+}
+
+.quick-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--glass-border);
+  z-index: 1;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}

@@ -1,0 +1,113 @@
+.ai-assistant {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  padding: 1.5rem;
+  border: 1px solid rgba(56, 189, 248, 0.3); /* Slight blue tint border */
+  box-shadow: 0 8px 32px 0 rgba(56, 189, 248, 0.1);
+}
+
+.ai-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--glass-border);
+  margin-bottom: 1rem;
+}
+
+.ai-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ai-title-wrapper h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.chat-container {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-right: 0.5rem;
+  /* Custom scrollbar for chat */
+  scrollbar-width: thin;
+  scrollbar-color: var(--glass-highlight) transparent;
+}
+
+.chat-message {
+  max-width: 85%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  animation: fadeIn var(--transition-fast) forwards;
+}
+
+.ai-msg {
+  align-self: flex-start;
+  background: rgba(56, 189, 248, 0.1);
+  border-radius: 12px 12px 12px 0;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: var(--text-primary);
+}
+
+.user-msg {
+  align-self: flex-end;
+  background: var(--glass-highlight);
+  border-radius: 12px 12px 0 12px;
+  border: 1px solid var(--glass-border);
+}
+
+.chat-input-container {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.chat-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-full);
+  padding: 0.75rem 1.25rem;
+  color: var(--text-primary);
+  font-family: var(--font-secondary);
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.chat-input:focus {
+  border-color: var(--text-accent);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.chat-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: linear-gradient(135deg, var(--text-accent), var(--color-storm));
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.send-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+}
