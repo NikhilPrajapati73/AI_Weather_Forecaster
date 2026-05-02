@@ -61,7 +61,8 @@ export const useWeatherData = () => {
 
   // Initial load
   useEffect(() => {
-    fetchWeather('New York');
+    const timer = setTimeout(() => fetchWeather('New York'), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   return {

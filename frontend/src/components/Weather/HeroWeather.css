@@ -25,12 +25,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   z-index: 1;
 }
 
 .city-name {
   font-size: 1.8rem;
   font-weight: 700;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .condition-badge {
@@ -76,6 +79,15 @@
   filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.4));
 }
 
+.weather-icon {
+  transition: transform var(--transition-normal), filter var(--transition-normal);
+}
+
+.hero-weather:hover .weather-icon {
+  transform: rotate(-4deg) scale(1.05);
+  filter: drop-shadow(0 0 24px rgba(96, 165, 250, 0.65));
+}
+
 .feels-like {
   font-size: 1.1rem;
   z-index: 1;
@@ -95,4 +107,32 @@
   align-items: center;
   gap: 0.5rem;
   font-weight: 500;
+}
+
+@media (max-width: 520px) {
+  .hero-weather {
+    padding: 1.35rem;
+    min-height: 0;
+  }
+
+  .hero-header,
+  .main-temp-container {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .temperature {
+    font-size: clamp(4rem, 28vw, 5.25rem);
+  }
+
+  .weather-illustration {
+    align-self: center;
+    width: 112px;
+    height: 112px;
+  }
+
+  .quick-stats {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Search, MapPin, Bell } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, MapPin, Bell, LocateFixed } from 'lucide-react';
 import './Header.css';
 
 const Header = ({ location, onSearch }) => {
@@ -18,6 +18,8 @@ const Header = ({ location, onSearch }) => {
       setQuery('');
     }
   };
+
+  const quickCities = ['Pune', 'Mumbai', 'Delhi'];
 
   const formattedDate = time.toLocaleDateString('en-US', {
     weekday: 'long',
@@ -49,7 +51,21 @@ const Header = ({ location, onSearch }) => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
+          <button className="search-submit" type="submit" aria-label="Search weather">
+            <Search size={16} />
+          </button>
         </form>
+        <div className="quick-searches" aria-label="Quick city searches">
+          <button type="button" className="quick-location-btn" onClick={() => onSearch('current location')}>
+            <LocateFixed size={14} />
+            Current
+          </button>
+          {quickCities.map((city) => (
+            <button type="button" className="quick-city-btn" key={city} onClick={() => onSearch(city)}>
+              {city}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="header-right">

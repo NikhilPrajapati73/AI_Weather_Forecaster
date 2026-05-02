@@ -1,16 +1,28 @@
-import React from 'react';
+import { createElement } from 'react';
 import { CloudRain, Wind, Droplets, Sun, Cloud, CloudLightning } from 'lucide-react';
 import './HeroWeather.css';
 
-const getIcon = (condition) => {
-  if (condition.includes('Rain')) return CloudRain;
-  if (condition.includes('Cloud')) return Cloud;
-  if (condition.includes('Thunder')) return CloudLightning;
-  return Sun;
+const weatherIcons = {
+  rain: CloudRain,
+  cloud: Cloud,
+  thunder: CloudLightning,
+  clear: Sun,
+};
+
+const getIconName = (condition) => {
+  const normalized = condition.toLowerCase();
+  if (normalized.includes('rain')) return 'rain';
+  if (normalized.includes('cloud')) return 'cloud';
+  if (normalized.includes('thunder')) return 'thunder';
+  return 'clear';
+};
+
+const WeatherIcon = ({ name, ...props }) => {
+  return createElement(weatherIcons[name] || Sun, props);
 };
 
 const HeroWeather = ({ data, location }) => {
-  const Icon = getIcon(data?.condition || 'Rain');
+  const iconName = getIconName(data?.condition || 'Rain');
   
   return (
     <div className="hero-weather glass-panel-heavy animate-slide-up" style={{ animationDelay: '0.1s' }}>
@@ -22,16 +34,18 @@ const HeroWeather = ({ data, location }) => {
       <div className="main-temp-container">
         <div className="temp-display">
           <span className="temperature font-primary text-gradient">{data?.temp || 18}</span>
-          <span className="unit font-primary text-gradient">°C</span>
+          <span className="unit font-primary text-gradient">&deg;C</span>
         </div>
         
         <div className="weather-illustration animate-float">
-          <Icon size={120} className="weather-icon" strokeWidth={1.5} />
+          <WeatherIcon name={iconName} size={120} className="weather-icon" strokeWidth={1.5} />
         </div>
       </div>
 
       <div className="feels-like">
-        <p className="text-secondary">Feels like {data?.feelsLike || 16}°C • High {data?.high || 22}° • Low {data?.low || 14}°</p>
+        <p className="text-secondary">
+          Feels like {data?.feelsLike || 16}&deg;C <span aria-hidden="true">/</span> High {data?.high || 22}&deg; <span aria-hidden="true">/</span> Low {data?.low || 14}&deg;
+        </p>
       </div>
 
       <div className="quick-stats">

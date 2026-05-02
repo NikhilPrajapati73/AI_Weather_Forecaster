@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import Header from './components/Header/Header'
 import HeroWeather from './components/Weather/HeroWeather'
@@ -23,14 +22,14 @@ function App() {
 
         {/* Center Column - Forecast & Metrics */}
         <div className="center-column">
-          <ForecastCards />
+          <ForecastCards data={weatherData?.current} />
           <WeatherMetrics data={weatherData?.current} />
         </div>
 
         {/* Right Column - AI & Insights */}
         <div className="side-column">
           <AIAssistant location={weatherData?.location} aiResponse={aiResponse} />
-          <SmartRecommendations />
+          <SmartRecommendations data={weatherData?.current} />
         </div>
       </main>
     </div>

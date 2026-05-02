@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Send, Bot, Sparkles } from 'lucide-react';
 import './AIAssistant.css';
 
@@ -7,14 +7,18 @@ const AIAssistant = ({ location, aiResponse }) => {
     { id: 1, type: 'ai', text: `Hello! I am your AI weather assistant for ${location || 'New York'}. How can I help you today?` }
   ]);
   const [input, setInput] = useState('');
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
-    // When aiResponse changes, add it as a new AI message
     if (aiResponse) {
-      setMessages(prev => [
-        ...prev, 
-        { id: Date.now(), type: 'ai', text: aiResponse }
-      ]);
+      const timer = setTimeout(() => {
+        setMessages(prev => [
+          ...prev,
+          { id: Date.now(), type: 'ai', text: aiResponse }
+        ]);
+      }, 0);
+
+      return () => clearTimeout(timer);
     }
   }, [aiResponse]);
 
@@ -26,6 +30,8 @@ const AIAssistant = ({ location, aiResponse }) => {
     const userMsg = { id: Date.now(), type: 'user', text: input };
     setMessages(prev => [...prev, userMsg]);
     setInput('');
+
+    setSending(true);
 
     try {
       // Import axios at the top if not present, but for now we'll just use fetch to avoid adding imports manually if not needed
@@ -46,6 +52,8 @@ const AIAssistant = ({ location, aiResponse }) => {
     } catch (error) {
       console.error('Chat error:', error);
       setMessages(prev => [...prev, { id: Date.now() + 1, type: 'ai', text: "Unable to fetch weather right now." }]);
+    } finally {
+      setSending(false);
     }
   };
 
@@ -65,6 +73,13 @@ const AIAssistant = ({ location, aiResponse }) => {
             <p>{msg.text}</p>
           </div>
         ))}
+        {sending && (
+          <div className="chat-message ai-msg typing-msg" aria-live="polite">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        )}
       </div>
 
       <form className="chat-input-container" onSubmit={handleSend}>
@@ -74,8 +89,9 @@ const AIAssistant = ({ location, aiResponse }) => {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about the weather..." 
           className="chat-input"
+          disabled={sending}
         />
-        <button type="submit" className="send-btn glass-pill">
+        <button type="submit" className="send-btn glass-pill" disabled={sending || !input.trim()} aria-label="Send message">
           <Send size={18} />
         </button>
       </form>

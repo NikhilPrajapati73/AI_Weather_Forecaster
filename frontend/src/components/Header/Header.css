@@ -16,6 +16,9 @@
   flex: 1;
   max-width: 500px;
   min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
 }
 
 .location-badge {
@@ -64,6 +67,54 @@
   opacity: 0.7;
 }
 
+.search-submit {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: var(--border-radius-full);
+  color: #06111f;
+  background: var(--text-accent);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.search-submit:hover {
+  transform: scale(1.04);
+  background: #7dd3fc;
+}
+
+.quick-searches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.quick-city-btn,
+.quick-location-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-full);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font: 600 0.78rem var(--font-secondary);
+  min-height: 32px;
+  padding: 0.35rem 0.75rem;
+  transition: var(--transition-fast);
+}
+
+.quick-city-btn:hover,
+.quick-location-btn:hover {
+  color: var(--text-primary);
+  background: var(--glass-highlight);
+  transform: translateY(-1px);
+}
+
 .datetime-display {
   display: flex;
   flex-direction: column;
@@ -108,4 +159,42 @@
   background-color: var(--color-alert);
   border-radius: 50%;
   border: 2px solid var(--bg-gradient-start);
+}
+
+@media (max-width: 760px) {
+  .header-container {
+    align-items: stretch;
+  }
+
+  .header-left,
+  .header-center,
+  .header-right {
+    width: 100%;
+  }
+
+  .header-center {
+    order: 3;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .header-right {
+    justify-content: space-between;
+  }
+
+  .search-submit {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .datetime-display {
+    align-items: flex-start;
+  }
+
+  .location-name,
+  .date {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

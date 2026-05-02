@@ -16,6 +16,7 @@
   gap: 1rem;
   padding: 1.25rem;
   transition: var(--transition-fast);
+  min-height: 104px;
 }
 
 .insight-card:hover {
@@ -48,4 +49,25 @@
 .insight-desc {
   font-size: 0.85rem;
   line-height: 1.4;
+}
+
+@media (max-width: 1023px) {
+  .insights-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .insight-card {
+    min-height: 132px;
+  }
+}
+
+@media (max-width: 760px) {
+  .insights-list {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-card {
+    min-height: 0;
+  }
 }

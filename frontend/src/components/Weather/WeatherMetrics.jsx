@@ -1,4 +1,3 @@
-import React from 'react';
 import { Thermometer, Wind, Droplets, Sun } from 'lucide-react';
 import './WeatherMetrics.css';
 
